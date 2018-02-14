@@ -1,0 +1,15 @@
+django<2
+django-activecollab-digger
+django-compressor
+django-extensions
+django-grappelli
+django-haystack==2.7.dev0
+django-kdl-ldap
+django-libsass
+django-model-utils
+django-redis
+lxml
+psycopg2
+pysolr
+redis
+wagtail

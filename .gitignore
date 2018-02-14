@@ -11,7 +11,7 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
+#dist/
 downloads/
 eggs/
 .eggs/
@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+logs/
+static/
+.vagrant
+playbook.retry
+local.py
+
+.DS_Store

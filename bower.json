@@ -1,0 +1,19 @@
+{
+    "name": "mpol",
+    "version": "0.1",
+    "dependencies": {
+        "jquery": null,
+        "foundation-sites": null,
+        "font-awesome": null,
+        "js-cookie": null,
+        "motion-ui": null
+    },
+    "main": "assets/js/main.js",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}

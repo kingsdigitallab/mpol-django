@@ -1,0 +1,97 @@
+{% load staticfiles compress periodicals_tags wagtailcore_tags %}
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block meta_title %}{% endblock %} | Masonic Periodicals</title>
+  <meta name="author" content="King's Digital Lab">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% compress css %}
+  <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
+    <!-- favicons -->
+  <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+  {% endcompress %}
+</head>
+<body>
+  <nav>
+    <div class="grid-container">
+      <div class="row">
+        <div class="small-12 columns">
+        {% block navigation %}
+          {% include 'includes/navigation.html' %}
+        {% endblock %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% block header %}
+  {% comment %} This is here because of overriding the title {% endcomment %}
+  <section class="breadcrumb-container">
+    <div class="row">
+      <div class="small-12 columns">
+        <div aria-label="You are here:" role="navigation">
+
+          <ul class="breadcrumbs">
+          {% block breadcrumbs %}
+          {% endblock %}
+          </ul>
+
+          <span class="show-for-sr">Current: </span> 
+           <h1 class="underline">
+          {% block title %}{% endblock %}<br>
+        </h1>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+  <main>
+  {% block main %}
+  {% endblock %}
+  </main>
+
+  <footer>
+    <div class="row">
+      <div class="small-12 columns">
+      {% block footer %}
+        {% include 'includes/footer.html' %}
+      {% endblock %}
+      </div>
+    </div>
+
+    <!-- Cookie disclaimer -->
+
+    <div class="callout cookies-box hide" id="cookie-disclaimer">
+      <p>We use cookies to track usage and preferences.</p>
+      <p><button class="button reverse closeme" aria-label="Dismiss alert" type="button">Accept</button></p>
+      <p><a href="/privacy-policy/" class="small">Privacy &amp; cookie policy</a></p>
+    </div>
+  </footer>
+
+  {% compress js %}
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'js/babel.min.js' %}"></script>
+  <script src="{% static 'vendor/what-input/dist/what-input.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/src/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/motion-ui/motion-ui.js' %}"></script>
+  <script src="{% static 'js/foundation.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% endcompress %}
+
+  {% block footer_scripts %}{% endblock %}
+
+  {% compress js %}
+  <script src="{% static 'js/google_analytics.js' %}"></script>
+  <script>
+    ga('create', '{{ GA_ID }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  {% endcompress %}
+</body>
+</html>

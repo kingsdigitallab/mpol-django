@@ -1,0 +1,15 @@
+{% extends "periodicals/base.html" %}
+{% load periodicals_tags %}
+
+{% block title %}Explore{% endblock %}
+
+{% block meta_title %}Publications | Explore{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="/">Home</a></li>
+<li>Explore</li>
+{% endblock %}
+
+{% block main %}
+{% include 'periodicals/includes/publications.html' %}
+{% endblock %}
