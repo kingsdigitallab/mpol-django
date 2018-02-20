@@ -221,6 +221,9 @@ class Article(models.Model):
             if current_article.page not in pages:
                 pages.append(current_article.page)
 
+        if current_article.page not in pages:
+                pages.append(current_article.page)
+
         return pages
 
     # Get total number of pages in article:
@@ -239,7 +242,8 @@ class Article(models.Model):
             current_article = current_article.continuation_from
 
         # Sanity check, for when current_article is a lone child
-        pages.append(current_article.page)
+        if current_article.page not in pages:
+            pages.append(current_article.page)
 
         return len(pages)
 
