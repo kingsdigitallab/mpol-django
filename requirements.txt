@@ -12,5 +12,5 @@ lxml
 psycopg2
 pysolr
 redis
-wagtail
+wagtail<2
 libsass==0.13.4
