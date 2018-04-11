@@ -51,8 +51,12 @@
   {% endblock %}
 
   <main>
-  {% block main %}
-  {% endblock %}
+    <div class="row">
+      <div class="small-12 columns">
+      {% block main %}
+      {% endblock %}
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -69,7 +73,7 @@
     <div class="callout cookies-box hide" id="cookie-disclaimer">
       <p>We use cookies to track usage and preferences.</p>
       <p><button class="button reverse closeme" aria-label="Dismiss alert" type="button">Accept</button></p>
-      <p><a href="/privacy-policy/" class="small">Privacy &amp; cookie policy</a></p>
+      <p><a href="/privacy-cookie-policy/" class="small">Privacy &amp; cookie policy</a></p>
     </div>
   </footer>
 
