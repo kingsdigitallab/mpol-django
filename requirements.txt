@@ -12,4 +12,4 @@ lxml
 psycopg2
 pysolr
 redis
-wagtail
+wagtail<2
