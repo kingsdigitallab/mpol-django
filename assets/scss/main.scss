@@ -31,6 +31,10 @@
 }
 
 
+.buttonforicons {
+    font-family: 'FontAwesome';
+}
+
 /* Globals */
 
 a {
@@ -101,6 +105,12 @@ main {
     }
 }
 
+.skip-main {
+    font-size: 1px;
+    position: absolute;
+    top:-25px;
+}
+
 // Hiding mobile menu on loading
 .no-js {
     @include breakpoint(small only) {
@@ -120,7 +130,7 @@ main {
 /* Navigation */
 
 nav {
-    background-color: #6898cc;
+    background-color: #2D5A8B;
     min-width: 100%;
 
     .label-toggle {
@@ -180,8 +190,11 @@ nav {
                     text-decoration: none;
                     transition: all .5s ease;
 
-                    &:hover {
+                    &:hover{
                         opacity:0.8;
+                    }
+                    &:focus{
+                        opacity:0.5;
                     }
                 }
             }
@@ -195,6 +208,10 @@ nav {
 .menu {
     a {
         padding: rem-calc(12 0);
+        
+        &:focus{
+            opacity:0.8;
+        }
     }
 
     &.subnav {
@@ -208,10 +225,13 @@ nav {
                 background: none;
                 border-bottom: 3px solid $primary-color;
                 color: darken($primary-color, 10%);
+                &:focus {
+                    color: darken($primary-color, 15%);
+                }
             }
             span{
                 font-size:0.75rem;
-                color:$medium-gray;
+                color:#545151;
             }
         }
     }
@@ -287,7 +307,7 @@ section.tab-to-accordion {
 // Card
 .card {
 
-    height: 100%;
+    height: 294px;
     position: relative;
     text-align: center;
 
@@ -332,7 +352,7 @@ section.tab-to-accordion {
 
         .card-footer {
             border-top: 1px solid $medium-gray;
-            color: $medium-gray;
+            color: #505154;
             margin-top: rem-calc(16);
             padding-top: rem-calc(16);
         }
@@ -573,7 +593,7 @@ li.accordion-item{
     .tag
     {
         background: #f0f0f0;
-        color: $primary-color;
+        color: #2d458b;
         display: inline-block;
         padding: 2px 10px;
         margin: 0 5px;
@@ -582,7 +602,7 @@ li.accordion-item{
         {
             background: $primary-color;
             border-radius: 10px;
-            color: #f0f0f0;
+            color: #ffffff;
             display: inline-block;
             font-family: sans-serif;
             font-size: 1em;
@@ -749,8 +769,13 @@ footer {
     font-size: rem-calc(14);
 
     a {
-        color: $white;
+        color: $white !important;
         font-weight: 700;
+        &:hover
+        {
+            text-decoration: underline;
+            color:$light-gray;
+        }
     }
 
     img {
@@ -783,13 +808,13 @@ footer {
 
     button,
     .button {
-        background: $primary-color;
+        background: scale-color($primary-color, $lightness: -30%);
         border: 0;
         color: $black;
         max-width: rem-calc(200px);
 
-        &:hover {
-            background: scale-color($primary-color, $lightness: -30%);
+        &:hover, &:focus {
+            background: scale-color($primary-color, $lightness: -50%);
             color: $white;
         }
     }

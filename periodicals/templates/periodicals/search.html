@@ -55,7 +55,7 @@
                                         <p class="help">{{ field.help_text|safe }}</p>
                                     {% endif %}
                                 {% endwith %}
-                                <input class="button" type="submit" value="Search">
+                                <input class="button" type="submit" value="Search" aria-label="search bar">
                             </div>
                         </div>
                     </form>
@@ -144,12 +144,12 @@
             <div class="tab_container">
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2" class="float-right">
-                    <i class="fa fa-th"></i>
+                    <button aria-label="Grid" class="buttonforicons"></button>
                     Grid
                 </label>
                 <input id="tab1" type="radio" name="tabs" checked>
                 <label for="tab1" class="float-right">
-                    <i class="fa fa-list-ul"></i>
+                    <button aria-label="List" class="buttonforicons"></button>
                     List
                 </label>
                 <section id="content1" class="tab-content">
