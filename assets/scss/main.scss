@@ -31,13 +31,15 @@
 }
 
 
-.buttonforicons {
+.icons {
     font-family: 'FontAwesome';
+    color: darken($dark-gray, 20%);
 }
 
 /* Globals */
 
 a {
+    font-weight: bold;
     &.text-center {
         display: block;
         text-align: center;
@@ -130,7 +132,7 @@ main {
 /* Navigation */
 
 nav {
-    background-color: #2D5A8B;
+    background-color: $primary-color;
     min-width: 100%;
 
     .label-toggle {
@@ -808,13 +810,13 @@ footer {
 
     button,
     .button {
-        background: scale-color($primary-color, $lightness: -30%);
+        background: $light-gray !important;
         border: 0;
-        color: $black;
+        color: $dark-gray;
         max-width: rem-calc(200px);
 
         &:hover, &:focus {
-            background: scale-color($primary-color, $lightness: -50%);
+            background: $primary-color;
             color: $white;
         }
     }

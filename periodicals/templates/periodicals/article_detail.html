@@ -27,17 +27,17 @@
             {% get_request_parameters as search_params %}
             {% if search_params %}
             <li>
-                <a href="{% url 'search' %}?{{ search_params }}"><button aria-lable="Button for back to results" class="buttonforicons"></button> Back to results</a>
+                <a href="{% url 'search' %}?{{ search_params }}"><span class="icons">&#xf060;</span> Back to results</a>
             </li>
             {% endif %}
             <li>
-                <a href="{{ article.issue.url }}"><button aria-lable="Issue" class="buttonforicons"></button> Issue</a>
+                <a href="{{ article.issue.url }}"><span class="icons">&#xf15c;</span> Issue</a>
             </li>
             <!-- <li>
                 <a href="{{ article.page.print_url }}"><i class="fa fa-print" aria-hidden="true"></i> Print Page</a>
             </li> -->
             <li>
-                <a href="{{ article.print_url }}" target="_blank"><button aria-lable="print full text" class="buttonforicons"></button> Print full article</a>
+                <a href="{{ article.print_url }}" target="_blank"><span class="icons">&#xf02f;</span> Print full article</a>
             </li>
         </ul>
     </div>
