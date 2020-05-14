@@ -815,12 +815,12 @@ footer {
     .button {
         background: $light-gray !important;
         border: 0;
-        color: $dark-gray;
+        color: $primary-color;
         max-width: rem-calc(200px);
 
         &:hover, &:focus {
             background: $primary-color;
-            color: $white;
+            color: scale-color($primary-color, $lightness:-15%);
         }
     }
 
