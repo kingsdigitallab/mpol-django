@@ -97,6 +97,9 @@ main {
     margin: rem-calc(8 0) !important;
     padding: rem-calc(12 16);
     width: 100%;
+    .icons{
+        color: $white;
+    }
 }
 
 .underline {
