@@ -25,9 +25,40 @@
 
 /* Fonts */
 
+//Euclid Circular B
+
 @font-face {
-    font-family: 'Petrona';
-    src: url('/static/fonts/Petrona/Petrona-Regular.ttf');
+    font-family: 'EuclidCircularB';
+    font-style: normal;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-style: italic;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-weight: medium;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-weight: medium;
+    font-style: italic;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.woff2") format("woff2");
 }
 
 
@@ -46,11 +77,16 @@ a {
     }
 }
 
-body,
+body {
+    font-family: 'EuclidCircularB', serif;
+    font-style: normal;
+}
+
 h1,
 h2,
 h3 {
-    font-family: 'Petrona', serif;
+    font-family: 'EuclidCircularB', serif;
+    font-weight: medium;
 }
 
 body
@@ -76,7 +112,6 @@ h2 {
 
 h3 {
     font-size: rem-calc(22);
-    font-weight: bold;
 
     span {
         font-size: rem-calc(16);
@@ -353,6 +388,7 @@ section.tab-to-accordion {
 
         p {
             color:$black;
+            font-family: 'Euclid Circular B';
         }
 
         .card-footer {
