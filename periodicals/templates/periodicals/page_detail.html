@@ -118,7 +118,7 @@
 
                 {% for article in page.articles_in_page.all %}
                 <div id="{{ article.aid }}">
-                    <h3 class="subtitle">{{ article|title }}</h3>
+                    <h2 class="subtitle">{{ article|title }}</h2>
                     {{ article.content_html|safe }}
                 </div>
                 {% endfor %}
@@ -222,7 +222,7 @@
 
                         {% for article in page.articles_in_page.all %}
                         <div id="{{ article.aid }}">
-                            <h3 class="subtitle">{{ article|title }}</h3>
+                            <h2 class="subtitle">{{ article|title }}</h2>
                             {{ article.content_html|safe }}
                         </div>
                         {% endfor %}

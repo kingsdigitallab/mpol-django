@@ -235,6 +235,7 @@ nav {
                     }
                     &:focus{
                         opacity:0.5;
+                        color: $light-gray;
                     }
                 }
             }
@@ -520,6 +521,9 @@ li.tabs-title{
         font-size:1rem;
         outline: 0;
         padding:1rem;
+        &:focus,&:hover{
+            color: #575757;
+        }
     }
 }
 
