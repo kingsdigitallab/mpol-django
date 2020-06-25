@@ -10,7 +10,8 @@ class PeriodicalsSearchForm(FacetedSearchForm):
     MODE_PHRASE = ('phrase', 'Phrase')
     MODE_CHOICES = (MODE_DEFAULT, MODE_AND, MODE_PHRASE)
     mode = forms.ChoiceField(
-        choices=MODE_CHOICES, initial=MODE_DEFAULT[0], widget=RadioSelect)
+        choices=MODE_CHOICES, initial=MODE_DEFAULT[0],
+        widget=RadioSelect)
 
     start_year = forms.IntegerField(required=False, initial=1793)
     end_year = forms.IntegerField(required=False, initial=1906)
@@ -22,6 +23,10 @@ class PeriodicalsSearchForm(FacetedSearchForm):
     order_by = forms.ChoiceField(
         choices=ORDER_BY_CHOICES, initial=ORDER_BY_DEFAULT[0],
         widget=RadioSelect)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['q'].widget.attrs['aria-label'] = 'search'
 
     def no_query_found(self):
         return self.searchqueryset.all()

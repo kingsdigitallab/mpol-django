@@ -15,9 +15,11 @@
   {% endcompress %}
 </head>
 <body>
-  <div role="complementary" class="skip-main"><a href="#maincontent">Skip to main content</a></div>
+  <div role="complementary" class="skip-main">
+    <a href="#maincontent" id="skip">Skip to main content</a>
+  </div>
   <nav>
-    <div class="grid-container">
+    <div class="grid-container" >
       <div class="row">
         <div class="small-12 columns">
         {% block navigation %}
@@ -34,7 +36,7 @@
   <section class="breadcrumb-container">
     <div class="row">
       <div class="small-12 columns">
-        <div aria-label="You are here:" role="navigation">
+        <div aria-label="breadcrumbs" role="navigation">
 
           <ul class="breadcrumbs">
           {% block breadcrumbs %}
