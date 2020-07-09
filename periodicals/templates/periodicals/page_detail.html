@@ -16,11 +16,11 @@
          <ul class="menu float-left">
             {% if request.GET.from == 'search'%}
             <li>
-                <a href="{{ search_path}}" ><span class="icons">&#xf060;</span> Back to search results</a>
+                <a href="{{ search_path}}" ><span class="fa fa-arrow-left"></span> Back to search results</a>
             </li>
             {% else %}
             <li>
-                <a href="{{ page.issue.url }}" ><span class="icons">&#xf060;</span></i> Back to {{ page.issue.publication}}, {{ page.issue.issue_date }}</a>
+                <a href="{{ page.issue.url }}" ><span class="fa fa-arrow-left"></span></i> Back to {{ page.issue.publication}}, {{ page.issue.issue_date }}</a>
             </li>
             {% endif %}
         </ul>
@@ -60,7 +60,7 @@
             <section id="content1" class="tab-content">
                 <ul class="menu float-right">
                     <li>
-                        <a href="{{ page.print_url }}" target="_blank"><span class="icons">&#xf02f;</span> Print image</a>
+                        <a href="{{ page.print_url }}" target="_blank"><span class="fa fa-print"></span> Print image</a>
                     </li>
                 </ul>
                 <ul class="accordion " data-accordion data-multi-expand="true" data-allow-all-closed="true">
@@ -89,7 +89,7 @@
                                                 {% endif %}
                                             </td>
                                             <td class="fixed">
-                                               <a href="{{ article.print_url }}" target="_blank"><span class="icons">&#xf02f;</span></a>
+                                               <a href="{{ article.print_url }}" target="_blank"><span class="fa fa-print"></span></a>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -112,7 +112,7 @@
                         <strong>Note:</strong> This text has been automatically extracted via Optical Character Recognition (OCR) software.
                     </p>
                     <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-                        <span class="icons">&#xf00d;</span>
+                        <span class="fa fa-times"></span>
                     </button>
                 </div>
 
@@ -132,10 +132,10 @@
                 <div class="tabs" data-tabs id="issue-tabs">
                     <ul class="menu float-right">
                         <li class="tabs-title is-active">
-                            <a href="#list" role="option" aria-selected="true"><span class="icons">&#xf03a;</span> List</a>
+                            <a href="#list" role="option" aria-selected="true"><span class="fa fa-list"></span> List</a>
                         </li>
                         <li class="tabs-title">
-                            <a href="#grid" role="option" data-tabs-target="grid"><span class="icons">&#xf00a;</span> Grid</a>
+                            <a href="#grid" role="option" data-tabs-target="grid"><span class="fa fa-th"></span> Grid</a>
                         </li>
                     </ul>
                 </div>
@@ -216,7 +216,7 @@
                             <p> <strong>Note:</strong> This text has been automatically extracted via Optical Character Recognition (OCR) software.
                             </p>
                             <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-                                <span class="icons">&#xf00d;</span>
+                                <span class="fa fa-times"></span>
                             </button>
                         </div>
 
