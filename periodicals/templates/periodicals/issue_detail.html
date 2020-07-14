@@ -15,12 +15,12 @@
     <div class="small-12 columns minus-margin-top">
          <ul class="menu float-left">
             <li>
-                <a href="{% url 'publication-detail' slug=issue.publication.slug %}" ><span class="icons">&#xf060;</span> Back to {{ issue.publication }}</a>
+                <a href="{% url 'publication-detail' slug=issue.publication.slug %}" ><span class="fa fa-arrow-left"></span> Back to {{ issue.publication }}</a>
             </li>
         </ul>
         <ul class="menu float-right">
             <li>
-                <a href="{{ issue.pdf.url }}" class="button"><span class="icons">&#xf15c;</span> View PDF</a>
+                <a href="{{ issue.pdf.url }}" class="button"><span class="fa fa-file"></span> View PDF</a>
             </li>
         </ul>
     </div>
@@ -31,12 +31,12 @@
         <div class="tab_container">
             <input id="tab2" type="radio" name="tabs">
             <label for="tab2" class="float-right">
-                <span class="icons">&#xf00a;</span>
+                <span class="fa fa-th"></span>
                 Pages
             </label>   
             <input id="tab1" type="radio" name="tabs" checked>
             <label for="tab1" class="float-right">
-                <span class="icons">&#xf03a;</span>
+                <span class="fa fa-list"></span>
                 Table of contents
             </label>
 
