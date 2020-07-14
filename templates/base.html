@@ -10,8 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% compress css %}
   <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
-    <!-- favicons -->
-  <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
   {% endcompress %}
 </head>
 <body>
