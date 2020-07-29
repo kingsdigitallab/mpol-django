@@ -554,6 +554,9 @@ section#list.tabs-panel.is-active{
         background: darken($primary-color, 10%);
         color: $white;
     }
+    &:focus{
+        color: $white;
+    }
 }
 
 ul.filters
@@ -972,7 +975,7 @@ footer {
         }
           
     }
-    .accordion-title.filters {
+    .g.filters {
         width: 100%;
     }
     ul.filters 
@@ -1177,7 +1180,6 @@ footer {
                 width:100%;
                 background: $light-gray;
                 border:1px solid $light-gray;
-                color: $black;
                 padding: 1rem;
                 &:before{
                     color: $black;
