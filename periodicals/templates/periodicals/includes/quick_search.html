@@ -4,12 +4,12 @@
     <form method="get" action="{% url 'search' %}" class="simple">
         <div class="row">
             <div class="small-12 columns">
-                <label>Keyword:</label>
+                <label aria-label="quick search">Keyword:</label>
                 {{ form.q }} {{ form.order_by.as_hidden }}
-
-                {{ form.mode }}
-
-                <input class="button" type="submit" value="Search">
+                <div role="radiogroup" aria-label="mode">
+                    {{ form.mode }}
+                </div>
+                <input class="button" type="submit" value="Search" aria-label="quick search">
                 <a href="{% url 'search' %}?{% initial_search_parameters %}" class="text-center">Advanced search</a>
             </div>
         </div>

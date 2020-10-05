@@ -69,7 +69,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #6898CC,
+  primary: #050A2F,
   secondary: #767676,
   success: #3adb76,
   warning: #ffae00,
@@ -82,7 +82,7 @@ $black: #0a0a0a;
 $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
-$body-font-family: 'Helvetica Neue', sans-serif;
+$body-font-family: 'EuclidCircularB', sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -168,8 +168,8 @@ $code-font-weight: $global-weight-normal;
 $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
-$anchor-color: darken($primary-color, 10%);
-$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
+$anchor-color: $primary-color;
+$anchor-color-hover: scale-color($secondary-color,$lightness:-40%);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
 $hr-width: $global-width;
@@ -227,7 +227,7 @@ $accordion-background: $white;
 $accordion-plusminus: true;
 $accordion-title-font-size: rem-calc(12);
 $accordion-item-color: $primary-color;
-$accordion-item-background-hover: $light-gray;
+$accordion-item-background-hover: $primary-color;
 $accordion-item-padding: 1.25rem 1rem;
 $accordion-content-background: $white;
 $accordion-content-border: 1px solid $light-gray;
@@ -397,7 +397,7 @@ $dropdownmenu-padding: $global-menu-padding;
 $dropdownmenu-nested-margin: 0;
 $dropdownmenu-submenu-padding: $dropdownmenu-padding;
 $dropdownmenu-border: 1px solid $medium-gray;
-$dropdown-menu-item-color-active: get-color(primary);
+$dropdown-menu-item-color-active: $light-gray;
 $dropdown-menu-item-background-active: transparent;
 
 // 19. Flexbox Utilities

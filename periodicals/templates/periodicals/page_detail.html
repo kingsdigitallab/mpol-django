@@ -16,11 +16,11 @@
          <ul class="menu float-left">
             {% if request.GET.from == 'search'%}
             <li>
-                <a href="{{ search_path}}" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to search results</a>
+                <a href="{{ search_path}}" ><span class="fa fa-arrow-left"></span> Back to search results</a>
             </li>
             {% else %}
             <li>
-                <a href="{{ page.issue.url }}" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to {{ page.issue.publication}}, {{ page.issue.issue_date }}</a>
+                <a href="{{ page.issue.url }}" ><span class="fa fa-arrow-left"></span></i> Back to {{ page.issue.publication}}, {{ page.issue.issue_date }}</a>
             </li>
             {% endif %}
         </ul>
@@ -60,7 +60,7 @@
             <section id="content1" class="tab-content">
                 <ul class="menu float-right">
                     <li>
-                        <a href="{{ page.print_url }}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print image</a>
+                        <a href="{{ page.print_url }}" target="_blank"><span class="fa fa-print"></span> Print image</a>
                     </li>
                 </ul>
                 <ul class="accordion " data-accordion data-multi-expand="true" data-allow-all-closed="true">
@@ -89,7 +89,7 @@
                                                 {% endif %}
                                             </td>
                                             <td class="fixed">
-                                               <a href="{{ article.print_url }}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                               <a href="{{ article.print_url }}" target="_blank"><span class="fa fa-print"></span></a>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -112,30 +112,32 @@
                         <strong>Note:</strong> This text has been automatically extracted via Optical Character Recognition (OCR) software.
                     </p>
                     <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-                        <i aria-hidden="true" class="fa fa-times-circle"></i>
+                        <span class="fa fa-times"></span>
                     </button>
                 </div>
 
                 {% for article in page.articles_in_page.all %}
                 <div id="{{ article.aid }}">
-                    <h3 class="subtitle">{{ article|title }}</h3>
+                    <h2 class="subtitle">{{ article|title }}</h2>
                     {{ article.content_html|safe }}
                 </div>
                 {% endfor %}
             </section>
 
             <section id="content5" class="tab-content" >
-                “{{ page.issue }}, Page {{ page.number }}” Masonic Periodicals Online,<i> Library and Museum of Freemasonry</i>, {% now "j N Y" %}, {{ request.META.HTTP_HOST }}{{ page.url }}.
+
+                “{{ page.issue }}, Page {{ page.number }}” Masonic Periodicals Online,<em> Library and Museum of Freemasonry</em>, {% now "j N Y" %}, {{ request.META.HTTP_HOST }}{{ page.url }}.
+
             </section>
 
             <section id="content3" class="tab-content">
                 <div class="tabs" data-tabs id="issue-tabs">
                     <ul class="menu float-right">
                         <li class="tabs-title is-active">
-                            <a href="#list" role="option" aria-selected="true"><i class="fa fa-list-ul" aria-hidden="true"></i> List</a>
+                            <a href="#list" role="option" aria-selected="true"><span class="fa fa-list"></span> List</a>
                         </li>
                         <li class="tabs-title">
-                            <a href="#grid" role="option" data-tabs-target="grid"><i class="fa fa-th" aria-hidden="true"></i> Grid</a>
+                            <a href="#grid" role="option" data-tabs-target="grid"><span class="fa fa-th"></span> Grid</a>
                         </li>
                     </ul>
                 </div>
@@ -216,13 +218,13 @@
                             <p> <strong>Note:</strong> This text has been automatically extracted via Optical Character Recognition (OCR) software.
                             </p>
                             <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-                                <i aria-hidden="true" class="fa fa-times-circle"></i>
+                                <span class="fa fa-times"></span>
                             </button>
                         </div>
 
                         {% for article in page.articles_in_page.all %}
                         <div id="{{ article.aid }}">
-                            <h3 class="subtitle">{{ article|title }}</h3>
+                            <h2 class="subtitle">{{ article|title }}</h2>
                             {{ article.content_html|safe }}
                         </div>
                         {% endfor %}

@@ -14,7 +14,7 @@
     <section>
         <div class="row">
             <div class="column">
-                <section class="callout">
+                <section aria-label="search form" class="callout">
                     <form method="get" action="#jumptoresults" class="advanced">
                         <div class="row medium-up-3 large-up-3">
                             <div class="column column-block">
@@ -23,11 +23,13 @@
                                         <p class="help">{{ field.help_text|safe }}</p>
                                     {% endif %}
                                 {% endwith %}
-                                {% with field=form.mode %} {{ field.errors }} {{ field.label_tag }}
-                                    {{ field }} {% if field.help_text %}
-                                    <p class="help">{{ field.help_text|safe }}</p>
-                                {% endif %}
-                                {% endwith %}
+                                <div role="radiogroup" aria-label="mode">
+                                    {% with field=form.mode %} {{ field.errors }} {{ field.label_tag }}
+                                        {{ field }} {% if field.help_text %}
+                                        <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
                             </div>
                             <div class="column column-block">
                                 <div class="row large-up-2">
@@ -50,12 +52,14 @@
                                 </div>
                             </div>
                             <div class="column column-block">
-                                {% with field=form.order_by %} {{ field.errors }} {{ field.label_tag }} {{ field }}
-                                    {% if field.help_text %}
-                                        <p class="help">{{ field.help_text|safe }}</p>
-                                    {% endif %}
-                                {% endwith %}
-                                <input class="button" type="submit" value="Search">
+                                <div role="radiogroup" aria-label="order by">
+                                    {% with field=form.order_by %} {{ field.errors }} {{ field.label_tag }} {{ field }}
+                                        {% if field.help_text %}
+                                            <p class="help">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <input class="button" type="submit" value="Search" aria-label="search bar">
                             </div>
                         </div>
                     </form>
@@ -69,7 +73,7 @@
         <div class="row">
             {% with selected_facets=request.GET|get_list:'selected_facets' active_facets=selected_facets|get_keys %}
 
-            <div class="small-12 columns">
+            <div class="small-12 columns" >
                 <h1 class="underline">
                     Results
                 </h1>
@@ -100,7 +104,7 @@
             </div>
 
 
-            <div class="small-12 columns">
+            <div class="small-12 columns" aria-label="search filters">
                 <ul class="accordion filters" data-accordion data-multi-expand="true" data-allow-all-closed="true">
                     <li class="accordion-item {% if 'year' in active_facets %}is-active{% endif %}" data-accordion-item>
                         <a href="#" class="accordion-title filters">Filter by Year</a>
@@ -138,22 +142,22 @@
             {% endwith %}
 
         </div>
-    </section>
+
     <div class="row">
         <div class="small-12 columns">
             <div class="tab_container">
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2" class="float-right">
-                    <i class="fa fa-th"></i>
+                    <span class="fa fa-th"></span>
                     Grid
                 </label>
                 <input id="tab1" type="radio" name="tabs" checked>
                 <label for="tab1" class="float-right">
-                    <i class="fa fa-list-ul"></i>
+                    <span class="fa fa-list"></span>
                     List
                 </label>
-                <section id="content1" class="tab-content">
-                    <table class="stack unstriped">
+                <section id="content1" class="tab-content" aria-label="search results">
+                    <table class="stack unstriped"  summary="search results">
                         <thead>
                         <tr>
                             <th></th>
@@ -285,5 +289,6 @@
                 </ul>
             </div>
         </div>
+     </section>
     {% endif %}
 {% endblock %}

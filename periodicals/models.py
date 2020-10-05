@@ -222,7 +222,7 @@ class Article(models.Model):
                 pages.append(current_article.page)
 
         if current_article.page not in pages:
-                pages.append(current_article.page)
+            pages.append(current_article.page)
 
         return pages
 

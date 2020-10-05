@@ -25,26 +25,68 @@
 
 /* Fonts */
 
+//Euclid Circular B
+
 @font-face {
-    font-family: 'Petrona';
-    src: url('/static/fonts/Petrona/Petrona-Regular.ttf');
+    font-family: 'EuclidCircularB';
+    font-style: normal;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Light-Web/M/EuclidCircularB-Light-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-style: italic;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-LightItalic-Web/M/EuclidCircularB-LightItalic-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-weight: medium;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-Medium-Web/M/EuclidCircularB-Medium-WebM.woff2") format("woff2");
+}
+@font-face {
+    font-family: 'EuclidCircularB';
+    font-weight: medium;
+    font-style: italic;
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.ttf");
+    src:    url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.eot") format("eot"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.woff") format("woff"),
+            url("/static/fonts/EuclidCircularB/EuclidCircularB-MediumItalic-Web/M/EuclidCircularB-MediumItalic-WebM.woff2") format("woff2");
 }
 
+
+.icons {
+    font-family: 'FontAwesome';
+    color: darken($dark-gray, 20%);
+}
 
 /* Globals */
 
 a {
+    font-weight: bold;
     &.text-center {
         display: block;
         text-align: center;
     }
 }
 
-body,
+body {
+    font-family: 'EuclidCircularB', sans-serif;
+    font-style: normal;
+}
+
 h1,
 h2,
 h3 {
-    font-family: 'Petrona', serif;
+    font-family: 'EuclidCircularB', sans-serif;
+    font-weight: medium;
 }
 
 body
@@ -70,7 +112,6 @@ h2 {
 
 h3 {
     font-size: rem-calc(22);
-    font-weight: bold;
 
     span {
         font-size: rem-calc(16);
@@ -91,6 +132,9 @@ main {
     margin: rem-calc(8 0) !important;
     padding: rem-calc(12 16);
     width: 100%;
+    .icons{
+        color: $white;
+    }
 }
 
 .underline {
@@ -99,6 +143,12 @@ main {
     &.margin-bottom {
         margin-bottom: rem-calc(32);
     }
+}
+
+.skip-main {
+    font-size: 1px;
+    position: absolute;
+    top:-25px;
 }
 
 // Hiding mobile menu on loading
@@ -120,7 +170,7 @@ main {
 /* Navigation */
 
 nav {
-    background-color: #6898cc;
+    background-color: $primary-color;
     min-width: 100%;
 
     .label-toggle {
@@ -180,8 +230,12 @@ nav {
                     text-decoration: none;
                     transition: all .5s ease;
 
-                    &:hover {
+                    &:hover{
                         opacity:0.8;
+                    }
+                    &:focus{
+                        opacity:0.5;
+                        color: $light-gray;
                     }
                 }
             }
@@ -195,6 +249,10 @@ nav {
 .menu {
     a {
         padding: rem-calc(12 0);
+        
+        &:focus{
+            opacity:0.8;
+        }
     }
 
     &.subnav {
@@ -208,10 +266,13 @@ nav {
                 background: none;
                 border-bottom: 3px solid $primary-color;
                 color: darken($primary-color, 10%);
+                &:focus {
+                    color: darken($primary-color, 15%);
+                }
             }
             span{
                 font-size:0.75rem;
-                color:$medium-gray;
+                color:#545151;
             }
         }
     }
@@ -287,7 +348,7 @@ section.tab-to-accordion {
 // Card
 .card {
 
-    height: 100%;
+    height: 294px;
     position: relative;
     text-align: center;
 
@@ -328,11 +389,12 @@ section.tab-to-accordion {
 
         p {
             color:$black;
+            font-family: 'Euclid Circular B';
         }
 
         .card-footer {
             border-top: 1px solid $medium-gray;
-            color: $medium-gray;
+            color: #505154;
             margin-top: rem-calc(16);
             padding-top: rem-calc(16);
         }
@@ -459,6 +521,9 @@ li.tabs-title{
         font-size:1rem;
         outline: 0;
         padding:1rem;
+        &:focus,&:hover{
+            color: #575757;
+        }
     }
 }
 
@@ -487,6 +552,9 @@ section#list.tabs-panel.is-active{
     }
     &:hover {
         background: darken($primary-color, 10%);
+        color: $white;
+    }
+    &:focus{
         color: $white;
     }
 }
@@ -573,7 +641,7 @@ li.accordion-item{
     .tag
     {
         background: #f0f0f0;
-        color: $primary-color;
+        color: #2d458b;
         display: inline-block;
         padding: 2px 10px;
         margin: 0 5px;
@@ -582,7 +650,7 @@ li.accordion-item{
         {
             background: $primary-color;
             border-radius: 10px;
-            color: #f0f0f0;
+            color: #ffffff;
             display: inline-block;
             font-family: sans-serif;
             font-size: 1em;
@@ -749,8 +817,13 @@ footer {
     font-size: rem-calc(14);
 
     a {
-        color: $white;
+        color: $white !important;
         font-weight: 700;
+        &:hover
+        {
+            text-decoration: underline;
+            color:$light-gray;
+        }
     }
 
     img {
@@ -783,14 +856,14 @@ footer {
 
     button,
     .button {
-        background: $primary-color;
+        background: $light-gray !important;
         border: 0;
-        color: $black;
+        color: $primary-color;
         max-width: rem-calc(200px);
 
-        &:hover {
-            background: scale-color($primary-color, $lightness: -30%);
-            color: $white;
+        &:hover, &:focus {
+            background: $primary-color;
+            color: scale-color($primary-color, $lightness:-15%);
         }
     }
 
@@ -902,7 +975,7 @@ footer {
         }
           
     }
-    .accordion-title.filters {
+    .g.filters {
         width: 100%;
     }
     ul.filters 
@@ -1107,7 +1180,6 @@ footer {
                 width:100%;
                 background: $light-gray;
                 border:1px solid $light-gray;
-                color: $black;
                 padding: 1rem;
                 &:before{
                     color: $black;
