@@ -109,3 +109,7 @@ local.py
 .DS_Store
 nohup.out
 .vagrant_provisioning/data.sql
+
+.env
+docker-compose.override.yml
+volumes/local_postgres_data*

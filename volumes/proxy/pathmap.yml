@@ -1,0 +1,24 @@
+loglevel: "warn"
+paths:
+  - source: "/"
+    maptype: "proxy"
+    target: "http://django:8000/"
+
+  - source: "/admin/"
+    maptype: "proxy"
+    target: "http://django:8000/admin/"
+    authgroups:
+      - "kdl-staff"
+      - "mpol"
+
+  - source: "/static/"
+    maptype: "files"
+    target: "/www/static/"
+
+  - source: "/images/"
+    maptype: "proxy"
+    target: "http://cantaloupe:8182/iiif/2/"
+
+  - source: "/robots.txt"
+    maptype: "single-file"
+    target: "/www/robots.txt"

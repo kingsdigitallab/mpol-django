@@ -1,0 +1,85 @@
+name: "mpol"
+
+services:
+  proxy:
+    image: gitlab.kdl.kcl.ac.uk:5050/docker-images/core/kdl-apache-proxy
+    volumes:
+      - ../volumes/proxy/pathmap.yml:/maps/pathmap.yaml:ro
+      - ../volumes/proxy/robots.txt:/www/robots.txt:ro
+      - ../volumes/django/static:/www/static
+    ports:
+      - "80:80"
+    restart: always
+
+  django:
+    build:
+      context: ..
+      dockerfile: ./compose/django/Dockerfile
+    restart: unless-stopped
+    expose:
+      - ${DJANGO_PORT:-8000}
+    volumes:
+      - ../volumes/django:/app
+    env_file:
+      - .env
+    command:
+      [
+        "/usr/local/bin/gunicorn",
+        "cewbj.wsgi",
+        "--bind",
+        "0.0.0.0:8000",
+        "--chdir=/app",
+        "--timeout",
+        "180",
+        "--forwarded-allow-ips=0.0.0.0",
+      ]
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    build:
+      context: ..
+      dockerfile: ./compose/postgres/Dockerfile
+    volumes:
+      - ../volumes/local_postgres_data:/var/lib/postgresql/data
+      - ../volumes/local_postgres_data_backups:/backups
+    env_file:
+      - .env
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "app_mpol_liv", "-U", "app_mpol"]
+      interval: 1s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:5.0
+    restart: unless-stopped
+    expose:
+      - ${REDIS_PORT:-6379}
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  solr:
+    image: solr:${SOLR_VERSION:-6-slim}
+    platform: linux/amd64
+    restart: unless-stopped
+    expose:
+      - 8983
+    volumes:
+      - ../volumes/solr-conf:/solr-conf
+    command:
+      - /bin/sh
+      - -xc
+      - |
+        cp /solr-conf/managed-schema /var/solr/data/collection || echo 'Core does not exist, creating...'
+        solr-precreate default /solr-conf
