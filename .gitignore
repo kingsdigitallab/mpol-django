@@ -110,6 +110,6 @@ local.py
 nohup.out
 .vagrant_provisioning/data.sql
 
-.env
+.env*
 docker-compose.override.yml
 volumes/local_postgres_data*
