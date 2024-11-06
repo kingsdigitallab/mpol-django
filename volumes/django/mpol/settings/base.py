@@ -132,9 +132,6 @@ USE_TZ = True
 LOGGING_ROOT = os.path.join(BASE_DIR, "logs")
 LOGGING_LEVEL = logging.WARN
 
-if not os.path.exists(LOGGING_ROOT):
-    os.makedirs(LOGGING_ROOT)
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -150,9 +147,10 @@ LOGGING = {
     "handlers": {
         "file": {
             "level": "DEBUG",
-            "class": "logging.handlers.TimedRotatingFileHandler",
+            "class": "logging.handlers.WatchedFileHandler",
             "filename": os.path.join(LOGGING_ROOT, "django.log"),
             "formatter": "verbose",
+            "delay": True,
         },
         "console": {
             "level": "DEBUG",
@@ -172,11 +170,6 @@ LOGGING = {
         },
         "mpol": {"handlers": ["file"], "level": LOGGING_LEVEL, "propagate": True},
         "periodicals": {
-            "handlers": ["file"],
-            "level": LOGGING_LEVEL,
-            "propagate": True,
-        },
-        "elasticsearch": {
             "handlers": ["file"],
             "level": LOGGING_LEVEL,
             "propagate": True,

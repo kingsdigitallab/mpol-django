@@ -34,8 +34,10 @@ RUN sed -i 's/\r$//g' /entrypoint \
   && chmod +x /entrypoint
 
 RUN mkdir -p ${APP_HOME}/logs \
+  && mkdir -p ${APP_HOME}/static/media \
   && chown -R django:django ${APP_HOME} \
-  && chmod -R 755 ${APP_HOME}/logs
+  && chmod -R 775 ${APP_HOME}/logs \
+  && chmod -R 775 ${APP_HOME}/static
 
 USER django
 
