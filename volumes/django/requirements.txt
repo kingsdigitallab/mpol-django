@@ -16,5 +16,3 @@ pysolr==3.7.0
 python-ldap<=3.0.0
 redis>=2.10,<3
 wagtail>=1.13,<2
-whitenoise==6.6.0
-
