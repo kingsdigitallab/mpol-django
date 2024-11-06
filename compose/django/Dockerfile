@@ -1,4 +1,4 @@
-FROM python:3.5-slim-buster
+FROM python:${PYTHON_VERSION:-3.8-slim-bookworm}
 
 ARG APP_HOME=/app
 
@@ -16,7 +16,7 @@ RUN apt-get update \
   # ldap dependencies
   libldap2-dev libsasl2-dev ldap-utils \
   # lxml dependencies
-  libxml2-dev libxslt-dev python-dev \
+  libxml2-dev libxslt-dev python3-dev \
   # pillow dependencies
   libjpeg-dev libpng-dev zlib1g-dev \
   # cleaning up unused files
