@@ -33,8 +33,9 @@ COPY --chown=django:django ./compose/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint \
   && chmod +x /entrypoint
 
-RUN mkdir -p ${APP_HOME}/logs
-RUN chown -R django:django ${APP_HOME}
+RUN mkdir -p ${APP_HOME}/logs \
+  && chown -R django:django ${APP_HOME} \
+  && chmod -R 755 ${APP_HOME}/logs
 
 USER django
 
