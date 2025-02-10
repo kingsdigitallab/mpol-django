@@ -29,6 +29,14 @@ services:
         "--bind",
         "0.0.0.0:8000",
         "--chdir=/app",
+        "--workers",
+        "3",
+        "--threads",
+        "2",
+        "--max-requests",
+        "500",
+        "--max-requests-jitter",
+        "50",
         "--timeout",
         "180",
         "--forwarded-allow-ips=0.0.0.0",
@@ -51,7 +59,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "app_mpol_liv", "-U", "app_mpol"]
+      test: ["CMD", "pg_isready", "-d", "wpp_mpol_liv", "-U", "app_mpol"]
       interval: 1s
       timeout: 3s
       retries: 10
