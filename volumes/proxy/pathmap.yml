@@ -15,10 +15,6 @@ paths:
     maptype: "files"
     target: "/www/static/"
 
-  - source: "/images/"
-    maptype: "proxy"
-    target: "http://cantaloupe:8182/iiif/2/"
-
   - source: "/robots.txt"
     maptype: "single-file"
     target: "/www/robots.txt"
