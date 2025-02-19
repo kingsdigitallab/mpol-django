@@ -78,17 +78,18 @@ services:
       start_period: 5s
 
   solr:
-    image: solr:${SOLR_VERSION:-6-slim}
+    image: solr:${SOLR_VERSION:-8-slim}
     platform: linux/amd64
     restart: unless-stopped
     expose:
       - 8983
     volumes:
       - ../volumes/solr-conf:/solr-conf
-      - ../volumes/solr-data:/opt/solr/server/solr
+      - ../volumes/solr:/var/solr
     command:
       - /bin/sh
       - -xc
       - |
-        cp /solr-conf/managed-schema /var/solr/data/collection || echo 'Core does not exist, creating...'
+        chown -R 8983:8983 /var/solr
+        cp /solr-conf/managed-schema /var/solr/data/default || echo 'Core does not exist, creating...'
         solr-precreate default /solr-conf

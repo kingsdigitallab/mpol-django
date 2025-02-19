@@ -346,7 +346,7 @@ WAGTAILSEARCH_BACKENDS = {
 HAYSTACK_CONNECTIONS = {
     "default": {
         "ENGINE": "haystack.backends.solr_backend.SolrEngine",
-        "URL": env.str("SOLR_URL", default="http://solr:8983/solr/default"),
+        "URL": env.str("SOLR_URL", default="http://solr:8983/solr/mpol"),
         "TIMEOUT": 60 * 5,
         "INCLUDE_SPELLING": True,
         "BATCH_SIZE": 100,
