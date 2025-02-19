@@ -43,7 +43,7 @@
 
 
 
-{% regroup publication.issues.all by issue_date.year as year_list %}
+{% regroup publication.get_issues by issue_date.year as year_list %}
 
 <section class="tab-to-accordion">
     <div class="row">

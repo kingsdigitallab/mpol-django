@@ -14,22 +14,21 @@ class Publication(models.Model):
     title_image = models.ImageField(null=True, blank=True)
 
     class Meta:
-        ordering = ['ordering']
+        ordering = ["ordering"]
 
     def __str__(self):
-        return '{}'.format(self.title if self.title else self.abbreviation)
+        return "{}".format(self.title if self.title else self.abbreviation)
 
     @property
     def url(self):
-        return reverse(
-            'publication-detail', kwargs={
-                'slug': self.slug
-            })
+        return reverse("publication-detail", kwargs={"slug": self.slug})
 
     def get_year_span(self):
         if self.issues.all().count() > 0:
-            return [self.issues.first().issue_date.year,
-                    self.issues.last().issue_date.year]
+            return [
+                self.issues.first().issue_date.year,
+                self.issues.last().issue_date.year,
+            ]
 
         return None
 
@@ -42,12 +41,15 @@ class Publication(models.Model):
         return None
 
     def get_total_number_of_pages(self):
-        aggregation = self.issues.aggregate(total_pages=Sum('number_of_pages'))
+        aggregation = self.issues.aggregate(total_pages=Sum("number_of_pages"))
 
         if aggregation:
-            return aggregation['total_pages']
+            return aggregation["total_pages"]
 
         return 0
+
+    def get_issues(self):
+        return self.issues.order_by("issue_date").all()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.abbreviation)
@@ -57,42 +59,41 @@ class Publication(models.Model):
 
 
 class Issue(models.Model):
-    publication = models.ForeignKey(Publication, related_name='issues')
+    publication = models.ForeignKey(Publication, related_name="issues")
     uid = models.CharField(max_length=32, unique=True)
     slug = models.CharField(max_length=32, unique=True)
     issue_date = models.DateField()
     number_of_pages = models.PositiveIntegerField(blank=True, null=True)
-    pdf = models.FileField(upload_to='periodicals/', null=True)
+    pdf = models.FileField(upload_to="periodicals/", null=True)
 
     class Meta:
-        ordering = ['publication', 'issue_date']
+        ordering = ["publication", "issue_date"]
 
     def __str__(self):
-        return '{}: {}'.format(self.publication, self.issue_date)
+        return "{}: {}".format(self.publication, self.issue_date)
 
     @property
     def articles(self):
-        article = ArticleType.objects.get_or_create(title='Article')[0]
-        return self.articles_in_issue.filter(continuation_from=None,
-                                             article_type=article)
+        article = ArticleType.objects.get_or_create(title="Article")[0]
+        return self.articles_in_issue.filter(
+            continuation_from=None, article_type=article
+        )
 
     @property
     def ads(self):
-        ad = ArticleType.objects.get_or_create(title='Ad')[0]
-        return self.articles_in_issue.filter(continuation_from=None,
-                                             article_type=ad)
+        ad = ArticleType.objects.get_or_create(title="Ad")[0]
+        return self.articles_in_issue.filter(continuation_from=None, article_type=ad)
 
     @property
     def articles_and_ads(self):
-        return (self.articles | self.ads).order_by('position_in_page')
+        return (self.articles | self.ads).order_by("position_in_page")
 
     @property
     def url(self):
         return reverse(
-            'issue-detail', kwargs={
-                'publication_slug': self.publication.slug,
-                'slug': self.slug
-            })
+            "issue-detail",
+            kwargs={"publication_slug": self.publication.slug, "slug": self.slug},
+        )
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.uid)
@@ -101,17 +102,17 @@ class Issue(models.Model):
 
 class Page(models.Model):
     height = models.PositiveIntegerField(null=True)
-    issue = models.ForeignKey(Issue, related_name='pages')
+    issue = models.ForeignKey(Issue, related_name="pages")
     number = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='periodicals/')
+    image = models.ImageField(upload_to="periodicals/")
     width = models.PositiveIntegerField(null=True)
-    words = JSONField(default='{}', null="true")
+    words = JSONField(default="{}", null="true")
 
     class Meta:
-        ordering = ['issue', 'number']
+        ordering = ["issue", "number"]
 
     def __str__(self):
-        return '{}: {}'.format(self.issue, self.number)
+        return "{}: {}".format(self.issue, self.number)
 
     @property
     def articles(self):
@@ -124,18 +125,24 @@ class Page(models.Model):
     @property
     def url(self):
         return reverse(
-            'page-detail', kwargs={
-                'publication_slug': self.issue.publication.slug,
-                'issue_slug': self.issue.slug, 'number': self.number
-            })
+            "page-detail",
+            kwargs={
+                "publication_slug": self.issue.publication.slug,
+                "issue_slug": self.issue.slug,
+                "number": self.number,
+            },
+        )
 
     @property
     def print_url(self):
         return reverse(
-            'page-print', kwargs={
-                'publication_slug': self.issue.publication.slug,
-                'issue_slug': self.issue.slug, 'number': self.number
-            })
+            "page-print",
+            kwargs={
+                "publication_slug": self.issue.publication.slug,
+                "issue_slug": self.issue.slug,
+                "number": self.number,
+            },
+        )
 
     def previous_page(self):
         if self.number > 1:
@@ -154,16 +161,17 @@ class ArticleType(models.Model):
     title = models.CharField(max_length=2048, blank=False, null=False)
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
     def __str__(self):
         return self.title
 
 
 class Article(models.Model):
-    issue = models.ForeignKey(Issue, related_name='articles_in_issue')
-    page = models.ForeignKey(Page, blank=True, null=True,
-                             related_name='articles_in_page')
+    issue = models.ForeignKey(Issue, related_name="articles_in_issue")
+    page = models.ForeignKey(
+        Page, blank=True, null=True, related_name="articles_in_page"
+    )
     aid = models.CharField(max_length=32)
     slug = models.SlugField(max_length=32, null=True)
     position_in_page = models.PositiveIntegerField(blank=True, null=True)
@@ -172,16 +180,17 @@ class Article(models.Model):
     content = models.TextField(blank=True, null=True)
     content_html = models.TextField(blank=True, null=True)
     continuation_from = models.ForeignKey(
-        'self', blank=True, null=True, related_name='continued_from')
+        "self", blank=True, null=True, related_name="continued_from"
+    )
     continuation_to = models.ForeignKey(
-        'self', blank=True, null=True, related_name='continues_in')
-    bounding_box = JSONField(default='{}')
-    title_image = models.ImageField(upload_to='periodicals/',
-                                    blank=True, null=True)
+        "self", blank=True, null=True, related_name="continues_in"
+    )
+    bounding_box = JSONField(default="{}")
+    title_image = models.ImageField(upload_to="periodicals/", blank=True, null=True)
     article_type = models.ForeignKey(ArticleType, blank=True, null=True)
 
     class Meta:
-        ordering = ['page__number', 'position_in_page', 'aid']
+        ordering = ["page__number", "position_in_page", "aid"]
 
     def __str__(self):
         return self.title if self.title else self.aid
@@ -189,20 +198,26 @@ class Article(models.Model):
     @property
     def url(self):
         return reverse(
-            'article-detail', kwargs={
-                'publication_slug': self.issue.publication.slug,
-                'issue_slug': self.issue.slug, 'number': self.page.number,
-                'article_slug': self.slug
-            })
+            "article-detail",
+            kwargs={
+                "publication_slug": self.issue.publication.slug,
+                "issue_slug": self.issue.slug,
+                "number": self.page.number,
+                "article_slug": self.slug,
+            },
+        )
 
     @property
     def print_url(self):
         return reverse(
-            'article-print', kwargs={
-                'publication_slug': self.issue.publication.slug,
-                'issue_slug': self.issue.slug, 'number': self.page.number,
-                'article_slug': self.slug
-            })
+            "article-print",
+            kwargs={
+                "publication_slug": self.issue.publication.slug,
+                "issue_slug": self.issue.slug,
+                "number": self.page.number,
+                "article_slug": self.slug,
+            },
+        )
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.aid)
@@ -249,9 +264,9 @@ class Article(models.Model):
 
     def get_text(self):
         if self.continuation_to:
-            return '{} {}'.format(
-                self.content if self.content else '',
-                self.continuation_to.get_text())
+            return "{} {}".format(
+                self.content if self.content else "", self.continuation_to.get_text()
+            )
 
         return self.content
 
@@ -265,102 +280,103 @@ class Article(models.Model):
         # Check if single article on page
         if page.number_of_articles == 1:
             return [
-                {'x': a['x0'], 'y': a['y0']},
-                {'x': a['x0'], 'y': a['y1']},
-                {'x': a['x1'], 'y': a['y1']},
-                {'x': a['x1'], 'y': a['y0']},
+                {"x": a["x0"], "y": a["y0"]},
+                {"x": a["x0"], "y": a["y1"]},
+                {"x": a["x1"], "y": a["y1"]},
+                {"x": a["x1"], "y": a["y0"]},
             ]
         else:
             # Article spans multiple columns
-            page_articles = page.articles_in_page.order_by(
-                'position_in_page').all()
+            page_articles = page.articles_in_page.order_by("position_in_page").all()
             first_article = page_articles[0]
             last_article = page_articles[page.number_of_articles - 1]
 
             if self == first_article:
                 next_article = page.articles_in_page.get(
-                    position_in_page=self.position_in_page + 1)
+                    position_in_page=self.position_in_page + 1
+                )
 
                 # noqa here as single letter variables are nicer
                 # when dealing with this
                 l = next_article.bounding_box  # noqa
 
-                if int(a['x1']) - int(a['x0']) > \
-                   (int(l['x1']) - int(l['x0'])) * weight:
+                if int(a["x1"]) - int(a["x0"]) > (int(l["x1"]) - int(l["x0"])) * weight:
                     # Double column
                     return [
-                        {'x': a['x0'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': l['y0']},
-                        {'x': l['x0'], 'y': l['y0']},
-                        {'x': l['x0'], 'y': a['y1']},
-                        {'x': a['x0'], 'y': a['y1']},
+                        {"x": a["x0"], "y": a["y0"]},
+                        {"x": a["x1"], "y": a["y0"]},
+                        {"x": a["x1"], "y": l["y0"]},
+                        {"x": l["x0"], "y": l["y0"]},
+                        {"x": l["x0"], "y": a["y1"]},
+                        {"x": a["x0"], "y": a["y1"]},
                     ]
                 else:
                     # Single column
                     return [
-                        {'x': a['x0'], 'y': a['y0']},
-                        {'x': a['x0'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y0']}
+                        {"x": a["x0"], "y": a["y0"]},
+                        {"x": a["x0"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y0"]},
                     ]
             elif self == last_article:
                 # This is the last article on the page
 
                 previous_article = page.articles_in_page.get(
-                    position_in_page=self.position_in_page - 1)
+                    position_in_page=self.position_in_page - 1
+                )
                 f = previous_article.bounding_box
 
-                if int(a['x1']) - int(a['x0']) > \
-                   (int(f['x1']) - int(f['x0'])) * weight:
+                if int(a["x1"]) - int(a["x0"]) > (int(f["x1"]) - int(f["x0"])) * weight:
                     # Double column
                     return [
-                        {'x': a['x0'], 'y': f['y1']},
-                        {'x': f['x1'], 'y': f['y1']},
-                        {'x': f['x1'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': a['y1']},
-                        {'x': a['x0'], 'y': a['y1']},
-
+                        {"x": a["x0"], "y": f["y1"]},
+                        {"x": f["x1"], "y": f["y1"]},
+                        {"x": f["x1"], "y": a["y0"]},
+                        {"x": a["x1"], "y": a["y0"]},
+                        {"x": a["x1"], "y": a["y1"]},
+                        {"x": a["x0"], "y": a["y1"]},
                     ]
                 else:
                     # Single column
                     return [
-                        {'x': a['x0'], 'y': a['y0']},
-                        {'x': a['x0'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y0']}
+                        {"x": a["x0"], "y": a["y0"]},
+                        {"x": a["x0"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y0"]},
                     ]
             else:
                 previous_article = page.articles_in_page.get(
-                    position_in_page=self.position_in_page - 1)
+                    position_in_page=self.position_in_page - 1
+                )
                 next_article = page.articles_in_page.get(
-                    position_in_page=self.position_in_page + 1)
+                    position_in_page=self.position_in_page + 1
+                )
 
                 f = previous_article.bounding_box
                 l = next_article.bounding_box  # noqa
 
                 # Check if over single or double column
-                if int(a['x1']) - int(a['x0']) > \
-                   (int(f['x1']) - int(f['x0'])) * weight \
-                   and int(a['x1']) - int(a['x0']) > \
-                   (int(l['x1']) - int(l['x0'])) * weight:
+                if (
+                    int(a["x1"]) - int(a["x0"]) > (int(f["x1"]) - int(f["x0"])) * weight
+                    and int(a["x1"]) - int(a["x0"])
+                    > (int(l["x1"]) - int(l["x0"])) * weight
+                ):
                     # Double column
                     return [
-                        {'x': a['x0'], 'y': f['y1']},
-                        {'x': f['x1'], 'y': f['y1']},
-                        {'x': f['x1'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': a['y0']},
-                        {'x': a['x1'], 'y': l['y0']},
-                        {'x': l['x0'], 'y': l['y0']},
-                        {'x': l['x0'], 'y': a['y1']},
-                        {'x': a['x0'], 'y': a['y1']}
+                        {"x": a["x0"], "y": f["y1"]},
+                        {"x": f["x1"], "y": f["y1"]},
+                        {"x": f["x1"], "y": a["y0"]},
+                        {"x": a["x1"], "y": a["y0"]},
+                        {"x": a["x1"], "y": l["y0"]},
+                        {"x": l["x0"], "y": l["y0"]},
+                        {"x": l["x0"], "y": a["y1"]},
+                        {"x": a["x0"], "y": a["y1"]},
                     ]
                 else:
                     # Single column
                     return [
-                        {'x': a['x0'], 'y': a['y0']},
-                        {'x': a['x0'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y1']},
-                        {'x': a['x1'], 'y': a['y0']}
+                        {"x": a["x0"], "y": a["y0"]},
+                        {"x": a["x0"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y1"]},
+                        {"x": a["x1"], "y": a["y0"]},
                     ]
