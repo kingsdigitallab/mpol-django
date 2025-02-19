@@ -43,7 +43,7 @@ CACHE_REDIS_DATABASE = env.str("DJANGO_CACHE_REDIS_DATABASE", default="0")
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/" + CACHE_REDIS_DATABASE,
+        "LOCATION": "redis://redis:6379/" + CACHE_REDIS_DATABASE,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "IGNORE_EXCEPTIONS": True,
@@ -179,7 +179,9 @@ LOGGING = {
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
