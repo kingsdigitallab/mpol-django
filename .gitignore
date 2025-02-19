@@ -113,3 +113,4 @@ nohup.out
 .env*
 docker-compose.override.yml
 volumes/local_postgres_data*
+volumes/solr

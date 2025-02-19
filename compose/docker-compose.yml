@@ -85,6 +85,7 @@ services:
       - 8983
     volumes:
       - ../volumes/solr-conf:/solr-conf
+      - ../volumes/solr-data:/opt/solr/server/solr
     command:
       - /bin/sh
       - -xc
