@@ -3,7 +3,7 @@ django-activecollab-digger
 django-compressor
 django-extensions
 django-grappelli
-django-haystack==2.7.dev0
+django-haystack==3.4.0
 django-kdl-ldap
 django-libsass
 django-model-utils
